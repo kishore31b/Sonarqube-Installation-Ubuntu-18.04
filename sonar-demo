@@ -21,7 +21,7 @@ Installing Nginx Server
 
 sudo apt update
 sudo apt install nginx
-curl http://13.235.103.219/
+curl http://13.233.79.47/
 
 ===============================================================================================================
 
@@ -97,7 +97,7 @@ sudo nano /etc/nginx/sites-enabled/sonarqube
 ---------------------------------------------------------------------------
 server {
     listen 80;
-    server_name 13.235.103.219;
+    server_name 13.233.79.47;
 
     location / {
         proxy_pass http://127.0.0.1:9000;
@@ -106,7 +106,7 @@ server {
 --------------------------------------------------------------------------------
 sudo nginx -t
 sudo service nginx restart
-curl http://13.235.103.219
+curl http://13.233.79.47
 ------------------------------------------------------------------------------------
 
 To change Port of Nginx and Sonar to run in nginx
@@ -119,7 +119,7 @@ sudo nano /etc/nginx/sites-enabled/sonarqube
 ---------------------------------------------------------------------------
 server {
     listen 7070;
-    server_name 13.235.103.219;
+    server_name 13.233.79.47;
 
     location / {
         proxy_pass http://127.0.0.1:9000;
@@ -128,7 +128,7 @@ server {
 --------------------------------------------------------------------------------
 sudo nginx -t
 sudo service nginx restart
-curl http://13.235.103.219:7070
+curl http://13.233.79.47:7070
 
 
 -------------------------------------------------------------------------

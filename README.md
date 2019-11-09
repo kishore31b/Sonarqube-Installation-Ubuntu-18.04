@@ -2,10 +2,7 @@
 
 Source: https://www.digitalocean.com/community/tutorials/how-to-ensure-code-quality-with-sonarqube-on-ubuntu-18-04
 
-
-
-JAVA-8 Installation
-====================
+## JAVA-8 Installation
 
 sudo apt update
 sudo apt install openjdk-8-jdk
@@ -18,19 +15,14 @@ sudo cat /etc/environment
 source /etc/environment
 echo $JAVA_HOME
 		/usr/lib/jvm/java-8-openjdk-amd64/jre/bin
-==================================================================================================================
 
-Installing Nginx Server
-=======================
+## Installing Nginx Server
 
 sudo apt update
 sudo apt install nginx
 curl http://13.235.103.219/
 
-===============================================================================================================
-
-Installing MySQL to Manage Site Data
-====================================
+## Installing MySQL to Manage Site Data
 
 sudo apt install mysql-server
 sudo mysql_secure_installation
@@ -43,10 +35,7 @@ sudo mysql
 	SELECT user,authentication_string,plugin,host FROM mysql.user;
 	exit
 
-====================================================================================================================
-
-Installing Sonarqube
-====================
+## Installing Sonarqube
 
 sudo adduser --system --no-create-home --group --disabled-login sonarqube
 sudo mkdir /opt/sonarqube
@@ -63,13 +52,14 @@ sudo unzip sonarqube-7.5.zip
 sudo rm sonarqube-7.5.zip
 sudo chown -R sonarqube:sonarqube /opt/sonarqube
 sudo nano sonarqube-7.5/conf/sonar.properties
-		sonar.jdbc.username=sonarqube
+	sonar.jdbc.username=sonarqube
     	sonar.jdbc.password=some_secure_password
-   		sonar.jdbc.url=jdbc:mysql://localhost:3306/sonarqube?useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs	=maxPerformance&useSSL=false
+	sonar.jdbc.url=jdbc:mysql://localhost:3306/sonarqube?	useUnicode=true&characterEncoding=utf8&rewriteBatchedStatements=true&useConfigs	=maxPerformance&useSSL=false
    		sonar.web.javaAdditionalOpts=-server
-	    sonar.web.host=127.0.0.1
+        sonar.web.host=127.0.0.1
 sudo nano /etc/systemd/system/sonarqube.service
---------------------------------------------------------------------------
+
+``
 [Unit]
 Description=SonarQube service
 After=syslog.target network.target
@@ -86,7 +76,7 @@ Restart=always
 
 [Install]
 WantedBy=multi-user.target
----------------------------------------------------------------------------
+``
 sudo service sonarqube start
 service sonarqube status
 sudo systemctl enable sonarqube
@@ -98,7 +88,7 @@ sudo netstat -plnt
 curl http://127.0.0.1:9000
 		You will get some result
 sudo nano /etc/nginx/sites-enabled/sonarqube
----------------------------------------------------------------------------
+``
 server {
     listen 80;
     server_name 13.235.103.219;
@@ -107,20 +97,18 @@ server {
         proxy_pass http://127.0.0.1:9000;
     }
 }
---------------------------------------------------------------------------------
+``
 sudo nginx -t
 sudo service nginx restart
 curl http://13.235.103.219
-------------------------------------------------------------------------------------
 
-To change Port of Nginx and Sonar to run in nginx
--------------------------------------------------
+## To change Port of Nginx and Sonar to run in nginx
 
 cd /etc/nginx/sites-enabled/ 
 sudo vi default
 		change to your wish in Listen : 7070
 sudo nano /etc/nginx/sites-enabled/sonarqube
----------------------------------------------------------------------------
+``
 server {
     listen 7070;
     server_name 13.235.103.219;
@@ -129,17 +117,14 @@ server {
         proxy_pass http://127.0.0.1:9000;
     }
 }
---------------------------------------------------------------------------------
+``
 sudo nginx -t
 sudo service nginx restart
 curl http://13.235.103.219:7070
 
+## To check errors in Sonarqube
 
--------------------------------------------------------------------------
-
-To check errors in Sonarqube
-===============================
 cd /opt/sonarqube/sonarqube-7.5/logs
 vi sonar.log
 
-===========================================================================
+

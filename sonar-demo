@@ -1,7 +1,5 @@
 Source: https://www.digitalocean.com/community/tutorials/how-to-ensure-code-quality-with-sonarqube-on-ubuntu-18-04
 
-
-
 JAVA-8 Installation
 ====================
 
@@ -140,4 +138,3 @@ To check errors in Sonarqube
 cd /opt/sonarqube/sonarqube-7.5/logs
 vi sonar.log
 
-===========================================================================

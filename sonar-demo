@@ -137,4 +137,42 @@ To check errors in Sonarqube
 ===============================
 cd /opt/sonarqube/sonarqube-7.5/logs
 vi sonar.log
+==========================================================================================
 
+Running Sonarqube in Apache2 Server
+=================================
+
+sudo service nginx restart
+
+sudo apt-get install apache2 -y
+sudo vi /etc/apache2/ports.conf
+	7070 Listen
+
+sudo vi /etc/apache2/sites-enabled/000-default.conf
+	<VirtualHost *:7070>
+
+sudo systemctl restart apache2
+sudo netstat -tulpn | grep :7070
+sudo a2enmod proxy
+sudo a2enmod proxy_http
+sudo systemctl restart apache2
+cd
+cd /etc/
+ls
+cd apache2/sites-available/
+ls
+vi sonar.conf
+sudo a2ensite sonar
+sudo systemctl restart apache2
+sudo netstat -plnt
+cat sonar.conf
+
+<VirtualHost *:7070>
+        ServerName 13.233.79.47
+        ServerAdmin admin@example.com
+        ProxyPreserveHost On
+        ProxyPass / http://127.0.0.1:9000/
+        ProxyPassReverse / http://127.0.0.1:9000/
+        TransferLog /var/log/apache2/sonarm_access.log
+        ErrorLog /var/log/apache2/sonar_error.log
+</VirtualHost>

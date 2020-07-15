@@ -176,3 +176,7 @@ cat sonar.conf
         TransferLog /var/log/apache2/sonarm_access.log
         ErrorLog /var/log/apache2/sonar_error.log
 </VirtualHost>
+
+
+Sonar instalation from another blog 
+https://www.howtoforge.com/tutorial/how-to-install-sonarqube-on-ubuntu-1604/
